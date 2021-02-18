@@ -17,6 +17,19 @@
   },
   "homepage": "https://github.com/gabriel-ns/clean-node-api#readme",
   "devDependencies": {
+    "husky": "^5.0.9",
+    "lint-staged": "^10.5.4",
     "standard": "^16.0.3"
+  },
+  "lint-staged": {
+    "*.js": [
+      "standard --fix",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
