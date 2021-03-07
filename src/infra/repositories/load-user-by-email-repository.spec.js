@@ -47,4 +47,10 @@ describe('LoadUserByEmail Repository', () => {
       password: createdUser.ops[0].password
     })
   })
+
+  test('Should throw if no userModel is provided', async () => {
+    const sut = new LoadUserByEmailRepository()
+    const promise = sut.load('any@email.com')
+    expect(promise).rejects.toThrow()
+  })
 })
