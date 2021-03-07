@@ -21,4 +21,12 @@ describe('Mongo Helper', () => {
     await sut.getDb()
     expect(sut.db).toBeTruthy()
   })
+
+  test('Should reconnect when getDb() is invoked and client is accidentally disconnected', async () => {
+    const sut = new MongoHelper()
+    await sut.connect(process.env.MONGO_URL)
+    await sut.client.close()
+    await sut.getDb()
+    expect(sut.client.isConnected()).toBeTruthy()
+  })
 })
