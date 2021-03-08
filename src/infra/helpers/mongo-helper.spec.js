@@ -5,9 +5,10 @@ describe('Mongo Helper', () => {
     const sut = new MongoHelper()
     await sut.connect(process.env.MONGO_URL)
     expect(sut.db).toBeTruthy()
+    await sut.disconnect()
   })
 
-  test('Should have a null db after connected', async () => {
+  test('Should have a null db after disconnected', async () => {
     const sut = new MongoHelper()
     await sut.connect(process.env.MONGO_URL)
     await sut.disconnect()
@@ -20,6 +21,7 @@ describe('Mongo Helper', () => {
     await sut.disconnect()
     await sut.getDb()
     expect(sut.db).toBeTruthy()
+    await sut.disconnect()
   })
 
   test('Should reconnect when getDb() is invoked and client is accidentally disconnected', async () => {
@@ -28,5 +30,6 @@ describe('Mongo Helper', () => {
     await sut.client.close()
     await sut.getDb()
     expect(sut.client.isConnected()).toBeTruthy()
+    await sut.disconnect()
   })
 })
