@@ -8,6 +8,7 @@
     "name": "Launch unit test",
     "request": "launch",
     "runtimeArgs": [
+      "run",
       "test"
     ],
     "runtimeExecutable": "npm",
