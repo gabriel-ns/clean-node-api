@@ -32,4 +32,19 @@ describe('Login Routes', () => {
       })
       .expect(200)
   })
+
+  test('Should return 401 when invalid credentials are provided', async () => {
+    await userModel.insertOne({
+      email: 'valid@email.com',
+      password: bcrypt.hashSync('hashed_password', 10)
+    })
+
+    await request(app)
+      .post('/api/login')
+      .send({
+        email: 'valid@email.com',
+        password: 'wrong_password'
+      })
+      .expect(401)
+  })
 })
