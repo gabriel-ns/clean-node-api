@@ -4,7 +4,6 @@ const MongoHelper = require('../helpers/mongo-helper')
 const UpdateAccessTokenRepository = require('./update-access-token-repository')
 let db
 let createdUserId
-const mongoHelper = new MongoHelper()
 
 const makeSut = () => {
   const userModel = db.collection('users')
@@ -17,8 +16,8 @@ const makeSut = () => {
 
 describe('UpdateAccessToken repository', () => {
   beforeAll(async () => {
-    await mongoHelper.connect(process.env.MONGO_URL)
-    db = await mongoHelper.getDb()
+    await MongoHelper.connect(process.env.MONGO_URL)
+    db = await MongoHelper.getDb()
   })
 
   beforeEach(async () => {
@@ -35,7 +34,7 @@ describe('UpdateAccessToken repository', () => {
   })
 
   afterAll(async () => {
-    await mongoHelper.disconnect()
+    await MongoHelper.disconnect()
   })
 
   test('Should update the user with the given accessToken', async () => {
