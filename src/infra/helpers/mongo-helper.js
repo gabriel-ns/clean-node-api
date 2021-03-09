@@ -18,7 +18,7 @@ module.exports = {
 
   async getCollection (name) {
     if (!this.client || !this.client.isConnected()) {
-      await this.connect(this.uri, this.dbName)
+      await this.connect(this.uri)
     }
     return this.db.collection(name)
   }
